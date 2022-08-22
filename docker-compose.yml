@@ -1,0 +1,58 @@
+version: '3.5'
+
+services:
+  club-management:
+    container_name: club-management
+    build:
+      context: ./docker
+      args:
+        UID: $U_ID
+    volumes:
+      - ./:/appdata/www
+    ###> XDEBUG 3 ###
+    # Use your client IP here
+    # Linux: run "ip a | grep docker0"
+    # Windows (with WSL2) and Mac: host.docker.internal
+    environment:
+      XDEBUG_CLIENT_HOST: host.docker.internal
+      XDEBUG_CLIENT_PORT: 9003
+      PHP_IDE_CONFIG: serverName=club-management
+    ports:
+      - '8000:8000'
+    networks:
+      - club-management-network
+    depends_on:
+      - club-management-mysql
+
+  club-management-mysql:
+    container_name: club-management-mysql
+    image: mysql:8.0.26
+    ports:
+      - '3336:3306'
+    environment:
+      MYSQL_DATABASE: club_management
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - club-management-mysql-data:/var/lib/mysql
+    networks:
+      - club-management-network
+    command: [ 'mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
+
+  club-management-phpmyadmin:
+    container_name: club-management-phpmyadmin
+    image: phpmyadmin:5.2.0
+    restart: always
+    environment:
+      PMA_HOST: club-management-mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8081:80"
+    networks:
+      - club-management-network
+
+networks:
+  club-management-network:
+
+volumes:
+  club-management-mysql-data:
