@@ -1,0 +1,78 @@
+App\Packages\Club\Domain\Entity\Club:
+    type: entity
+    table: club
+    repositoryClass: App\Packages\Club\Infrastructure\Persistence\Doctrine\ClubRepository
+    id:
+        id:
+            type: uuid
+            scale: null
+            length: null
+            unique: true
+            nullable: false
+            precision: null
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            scale: null
+            length: 100
+            unique: false
+            nullable: false
+            precision: null
+        city:
+            type: string
+            scale: null
+            length: 100
+            unique: false
+            nullable: false
+            precision: null
+        country:
+            type: string
+            scale: null
+            length: 100
+            unique: false
+            nullable: false
+            precision: null
+        budget:
+            type: integer
+            scale: null
+            length: null
+            unique: false
+            nullable: false
+            precision: null
+        createdAt:
+            type: datetime
+            scale: null
+            length: null
+            unique: false
+            nullable: false
+            precision: null
+            column: created_at
+        updatedAt:
+            type: datetime
+            scale: null
+            length: null
+            unique: false
+            nullable: true
+            precision: null
+            column: updated_at
+    oneToMany:
+        players:
+            targetEntity: App\Packages\Player\Domain\Entity\Player
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: club
+            inversedBy: null
+            orphanRemoval: false
+            orderBy: null
+        coaches:
+            targetEntity: App\Packages\Coach\Domain\Entity\Coach
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: club
+            inversedBy: null
+            orphanRemoval: false
+            orderBy: null
+    lifecycleCallbacks: {  }

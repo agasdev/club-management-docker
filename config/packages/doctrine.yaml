@@ -10,11 +10,24 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
+            App\Packages\Club\Domain\Entity:
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+                type: yml
+                dir: '%kernel.project_dir%/src/Packages/Club/Infrastructure/Mapping'
+                prefix: 'App\Packages\Club\Domain\Entity'
+                alias: Club
+            App\Packages\Player\Domain\Entity:
+                is_bundle: false
+                type: yml
+                dir: '%kernel.project_dir%/src/Packages/Player/Infrastructure/Mapping'
+                prefix: 'App\Packages\Player\Domain\Entity'
+                alias: Player
+            App\Packages\Coach\Domain\Entity:
+                is_bundle: false
+                type: yml
+                dir: '%kernel.project_dir%/src/Packages/Coach/Infrastructure/Mapping'
+                prefix: 'App\Packages\Coach\Domain\Entity'
+                alias: Coach
 
 when@test:
     doctrine:
