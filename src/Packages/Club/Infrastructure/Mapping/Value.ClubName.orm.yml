@@ -1,0 +1,11 @@
+App\Packages\Club\Domain\Entity\Value\ClubName:
+    type: embeddable
+    fields:
+        value:
+            column: name
+            type: string
+            scale: null
+            length: 100
+            unique: false
+            nullable: false
+            precision: null

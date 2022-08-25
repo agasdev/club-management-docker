@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Packages\Player\Domain\Entity\Value;
+namespace App\Packages\Club\Domain\Entity\Value;
 
 use App\Packages\Common\Domain\Value\CommonUuid;
-use Doctrine\ORM\Mapping as ORM;
 
-class PlayerUuid extends CommonUuid
+class ClubUuid extends CommonUuid
 {
     protected string $value;
 

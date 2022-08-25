@@ -29,7 +29,7 @@ App\Packages\Player\Domain\Entity\Player:
             nullable: true
             precision: null
             column: updated_at
-            columnDefinition: DATETIME on update CURRENT_TIMESTAMP
+            columnDefinition: DATETIME DEFAULT NULL on update CURRENT_TIMESTAMP COMMENT '(DC2Type:datetime_immutable)'
     embedded:
         id:
             class: App\Packages\Player\Domain\Entity\Value\PlayerUuid

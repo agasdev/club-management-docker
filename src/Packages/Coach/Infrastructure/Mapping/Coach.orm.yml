@@ -29,7 +29,7 @@ App\Packages\Coach\Domain\Entity\Coach:
             nullable: true
             precision: null
             column: updated_at
-            columnDefinition: DATETIME on update CURRENT_TIMESTAMP
+            columnDefinition: DATETIME DEFAULT NULL on update CURRENT_TIMESTAMP COMMENT '(DC2Type:datetime_immutable)'
     embedded:
         id:
             class: App\Packages\Coach\Domain\Entity\Value\CoachUuid

@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace App\Packages\Club\Domain\Entity;
 
+use App\Packages\Club\Domain\Entity\Value\ClubBudget;
+use App\Packages\Club\Domain\Entity\Value\ClubCity;
+use App\Packages\Club\Domain\Entity\Value\ClubCountry;
+use App\Packages\Club\Domain\Entity\Value\ClubName;
+use App\Packages\Club\Domain\Entity\Value\ClubUuid;
 use App\Packages\Club\Infrastructure\Persistence\Doctrine\DoctrineClubRepository;
 use App\Packages\Coach\Domain\Entity\Coach;
 use App\Packages\Player\Domain\Entity\Player;
@@ -16,11 +21,11 @@ use JMS\Serializer\Annotation\Type;
 #[ORM\Entity(repositoryClass: DoctrineClubRepository::class)]
 class Club
 {
-    private string $id;
-    private string $name;
-    private string $city;
-    private string $country;
-    private int $budget;
+    private ClubUuid $id;
+    private ClubName $name;
+    private ClubCity $city;
+    private ClubCountry $country;
+    private ClubBudget $budget;
     /**
      * @Type("DateTimeImmutable<'Y-m-d H:i:s'>")
      */
@@ -33,11 +38,11 @@ class Club
     private Collection $coaches;
 
     public function __construct(
-        string $id,
-        string $name,
-        string $city,
-        string $country,
-        int $budget,
+        ClubUuid $id,
+        ClubName $name,
+        ClubCity $city,
+        ClubCountry $country,
+        ClubBudget $budget,
         DateTimeImmutable $createdAt,
         ?DateTimeImmutable $updatedAt = null
     )
@@ -53,27 +58,27 @@ class Club
         $this->coaches = new ArrayCollection();
     }
 
-    public function getId(): string
+    public function getId(): ClubUuid
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): ClubName
     {
         return $this->name;
     }
 
-    public function getCity(): string
+    public function getCity(): ClubCity
     {
         return $this->city;
     }
 
-    public function getCountry(): string
+    public function getCountry(): ClubCountry
     {
         return $this->country;
     }
 
-    public function getBudget(): int
+    public function getBudget(): ClubBudget
     {
         return $this->budget;
     }

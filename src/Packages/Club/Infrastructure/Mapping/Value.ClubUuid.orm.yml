@@ -1,0 +1,9 @@
+App\Packages\Club\Domain\Entity\Value\ClubUuid:
+    type: embeddable
+    id:
+        value:
+            column: id
+            type: uuid
+            id: true
+            generator:
+              strategy: IDENTITY
