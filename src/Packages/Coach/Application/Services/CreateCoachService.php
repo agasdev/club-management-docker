@@ -41,7 +41,7 @@ class CreateCoachService
      * @throws CoachAlreadyExistException
      * @throws InvalidResourceException
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): CoachDto
     {
         $coachDto = CoachDto::createEmpty();
         $form = $this->formFactory->create(CoachFormType::class, $coachDto);

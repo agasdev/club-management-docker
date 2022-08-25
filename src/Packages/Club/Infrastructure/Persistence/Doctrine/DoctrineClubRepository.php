@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Packages\Club\Infrastructure\Persistence\Doctrine;
 
 use App\Packages\Club\Domain\Entity\Club;
+use App\Packages\Club\Domain\Entity\Value\ClubName;
 use App\Packages\Club\Domain\Repository\ClubRepository;
 use App\Packages\Common\Infrastructure\Repository\DoctrineRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -22,6 +23,11 @@ class DoctrineClubRepository implements ClubRepository
     {
         $this->doctrineRepository->persist($club);
         $this->doctrineRepository->flush($club);
+    }
+
+    public function findOneByName(ClubName $name): ?Club
+    {
+        return $this->doctrineRepository->findOneBy(['name.value' => $name->value()]);
     }
 
 //    /**
