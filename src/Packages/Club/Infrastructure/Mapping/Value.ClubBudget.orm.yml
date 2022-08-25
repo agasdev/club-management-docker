@@ -3,7 +3,7 @@ App\Packages\Club\Domain\Entity\Value\ClubBudget:
     fields:
         value:
             column: budget
-            type: integer
+            type: bigint
             scale: null
             length: null
             unique: false

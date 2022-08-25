@@ -36,8 +36,8 @@ class Player
         PlayerSalary $salary,
         PlayerEmail $email,
         DateTimeImmutable $createdAt,
-        ?DateTimeImmutable $updatedAt = null,
-        ?Club $club = null
+        ?Club $club = null,
+        ?DateTimeImmutable $updatedAt = null
     )
     {
         $this->id = $id;
@@ -48,8 +48,8 @@ class Player
         $this->salary = $salary;
         $this->email = $email;
         $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
         $this->club = $club;
+        $this->updatedAt = $updatedAt;
     }
 
 

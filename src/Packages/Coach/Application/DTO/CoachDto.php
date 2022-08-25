@@ -2,6 +2,7 @@
 
 namespace App\Packages\Coach\Application\DTO;
 
+use App\Packages\Club\Application\DTO\ClubDto;
 use App\Packages\Coach\Domain\Entity\Coach;
 
 class CoachDto
@@ -14,6 +15,7 @@ class CoachDto
     public ?string $country;
     public ?int $salary;
     public ?string $email;
+    public ?ClubDto $club;
 
     public function __construct(
         string $id = null,
@@ -23,7 +25,8 @@ class CoachDto
         string $city= null,
         string $country= null,
         int $salary= null,
-        string $email= null
+        string $email= null,
+        ClubDto $club = null
     )
     {
         $this->id = $id;
@@ -34,6 +37,7 @@ class CoachDto
         $this->country = $country;
         $this->salary = $salary;
         $this->email = $email;
+        $this->club = $club;
     }
 
     public static function assemble(Coach $coach): self
@@ -46,7 +50,8 @@ class CoachDto
             $coach->getCity()->value(),
             $coach->getCountry()->value(),
             $coach->getSalary()->value(),
-            $coach->getEmail()->value()
+            $coach->getEmail()->value(),
+            $coach->getClub() ? ClubDto::assemble($coach->getClub()) : null
         );
     }
 

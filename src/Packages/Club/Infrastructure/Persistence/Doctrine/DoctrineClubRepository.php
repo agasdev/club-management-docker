@@ -6,6 +6,7 @@ namespace App\Packages\Club\Infrastructure\Persistence\Doctrine;
 
 use App\Packages\Club\Domain\Entity\Club;
 use App\Packages\Club\Domain\Entity\Value\ClubName;
+use App\Packages\Club\Domain\Entity\Value\ClubUuid;
 use App\Packages\Club\Domain\Repository\ClubRepository;
 use App\Packages\Common\Infrastructure\Repository\DoctrineRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -28,6 +29,11 @@ class DoctrineClubRepository implements ClubRepository
     public function findOneByName(ClubName $name): ?Club
     {
         return $this->doctrineRepository->findOneBy(['name.value' => $name->value()]);
+    }
+
+    public function find(ClubUuid $id): ?Club
+    {
+        return $this->doctrineRepository->find($id->value());
     }
 
 //    /**

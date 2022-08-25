@@ -18,16 +18,14 @@ use App\Packages\Club\Domain\Exception\InvalidClubCountryException;
 use App\Packages\Club\Domain\Exception\InvalidClubNameException;
 use App\Packages\Club\Domain\Repository\ClubRepository;
 use App\Packages\Common\Application\Exception\InvalidResourceException;
-use App\Packages\Common\Application\Services\GetErrorsFromForm;
+use App\Packages\Common\Application\Services\CreateAndValidateForm;
 use DateTimeImmutable;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class CreateClubService
 {
     public function __construct(
-        private FormFactoryInterface $formFactory,
-        private GetErrorsFromForm $getErrorsFromForm,
+        private CreateAndValidateForm $createAndValidateForm,
         private ClubRepository $clubRepository
     )
     {
@@ -40,14 +38,14 @@ class CreateClubService
      */
     public function __invoke(Request $request): ClubDto
     {
-        $clubDto = ClubDto::createEmpty();
-        $form = $this->formFactory->create(ClubFormType::class, $clubDto);
-        $form->submit(json_decode($request->getContent(), true));
-        if (!$form->isValid()) {
-            throw new InvalidClubFormException(json_encode([
-                'type' => 'validation_error',
-                'errors' => ($this->getErrorsFromForm)($form)
-            ]));
+        try {
+            $clubDto = ($this->createAndValidateForm)(
+                $request,
+                ClubFormType::class,
+                ClubDto::createEmpty()
+            );
+        } catch (InvalidResourceException $e) {
+            throw new InvalidClubFormException($e->getMessage());
         }
 
         if ($this->clubRepository->findOneByName(new ClubName($clubDto->name))) {

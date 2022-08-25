@@ -2,6 +2,8 @@
 
 namespace App\Packages\Coach\Application\Services;
 
+use App\Packages\Club\Domain\Entity\Value\ClubUuid;
+use App\Packages\Club\Domain\Repository\ClubRepository;
 use App\Packages\Coach\Application\DTO\CoachDto;
 use App\Packages\Coach\Application\Exception\CoachAlreadyExistException;
 use App\Packages\Coach\Application\Exception\InvalidCoachFormException;
@@ -20,18 +22,17 @@ use App\Packages\Coach\Domain\Exception\InvalidCoachNameException;
 use App\Packages\Coach\Domain\Exception\InvalidCoachSalaryException;
 use App\Packages\Coach\Domain\Repository\CoachRepository;
 use App\Packages\Common\Application\Exception\InvalidResourceException;
-use App\Packages\Common\Application\Services\GetErrorsFromForm;
+use App\Packages\Common\Application\Services\CreateAndValidateForm;
 use DateTime;
 use DateTimeImmutable;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class CreateCoachService
 {
     public function __construct(
-        private FormFactoryInterface $formFactory,
-        private GetErrorsFromForm $getErrorsFromForm,
-        private CoachRepository $coachRepository
+        private CreateAndValidateForm $createAndValidateForm,
+        private CoachRepository $coachRepository,
+        private ClubRepository $clubRepository
     )
     {
     }
@@ -41,16 +42,17 @@ class CreateCoachService
      * @throws CoachAlreadyExistException
      * @throws InvalidResourceException
      */
-    public function __invoke(Request $request): CoachDto
+    public function __invoke(Request $request, ?string $clubId = null): CoachDto
     {
-        $coachDto = CoachDto::createEmpty();
-        $form = $this->formFactory->create(CoachFormType::class, $coachDto);
-        $form->submit(json_decode($request->getContent(), true));
-        if (!$form->isValid()) {
-            throw new InvalidCoachFormException(json_encode([
-                'type' => 'validation_error',
-                'errors' => ($this->getErrorsFromForm)($form)
-            ]));
+
+        try {
+            $coachDto = ($this->createAndValidateForm)(
+                $request,
+                CoachFormType::class,
+                CoachDto::createEmpty()
+            );
+        } catch (InvalidResourceException $e) {
+            throw new InvalidCoachFormException($e->getMessage());
         }
 
         if ($this->coachRepository->findOneByEmail(new CoachEmail($coachDto->email))) {
@@ -66,7 +68,8 @@ class CreateCoachService
                 new CoachCountry($coachDto->country),
                 new CoachSalary($coachDto->salary),
                 new CoachEmail($coachDto->email),
-                new DateTimeImmutable()
+                new DateTimeImmutable(),
+                $clubId ? ($this->clubRepository->find(new ClubUuid($clubId))) : null
             );
 
             $this->coachRepository->add($coach);

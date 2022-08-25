@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Packages\Player\Application\Services;
 
+use App\Packages\Club\Domain\Entity\Value\ClubUuid;
+use App\Packages\Club\Domain\Repository\ClubRepository;
 use App\Packages\Common\Application\Exception\InvalidResourceException;
-use App\Packages\Common\Application\Services\GetErrorsFromForm;
+use App\Packages\Common\Application\Services\CreateAndValidateForm;
 use App\Packages\Player\Application\DTO\PlayerDto;
 use App\Packages\Player\Application\Exception\InvalidPlayerFormException;
 use App\Packages\Player\Application\Exception\PlayerAlreadyExistException;
@@ -25,16 +27,15 @@ use App\Packages\Player\Domain\Exception\InvalidPlayerSalaryException;
 use App\Packages\Player\Domain\Repository\PlayerRepository;
 use DateTime;
 use DateTimeImmutable;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class CreatePlayerService
 {
 
     public function __construct(
-        private FormFactoryInterface $formFactory,
-        private GetErrorsFromForm $getErrorsFromForm,
-        private PlayerRepository $playerRepository
+        private CreateAndValidateForm $createAndValidateForm,
+        private PlayerRepository $playerRepository,
+        private ClubRepository $clubRepository
     )
     {
     }
@@ -44,16 +45,16 @@ class CreatePlayerService
      * @throws InvalidResourceException
      * @throws PlayerAlreadyExistException
      */
-    public function __invoke(Request $request): PlayerDto
+    public function __invoke(Request $request, ?string $clubId = null): PlayerDto
     {
-        $playerDto = PlayerDto::createEmpty();
-        $form = $this->formFactory->create(PlayerFormType::class, $playerDto);
-        $form->submit(json_decode($request->getContent(), true));
-        if (!$form->isValid()) {
-            throw new InvalidPlayerFormException(json_encode([
-                'type' => 'validation_error',
-                'errors' => ($this->getErrorsFromForm)($form)
-            ]));
+        try {
+            $playerDto = ($this->createAndValidateForm)(
+                $request,
+                PlayerFormType::class,
+                PlayerDto::createEmpty()
+            );
+        } catch (InvalidResourceException $e) {
+            throw new InvalidPlayerFormException($e->getMessage());
         }
 
         if ($this->playerRepository->findOneByEmail(new PlayerEmail($playerDto->email))) {
@@ -69,7 +70,8 @@ class CreatePlayerService
                 new PlayerCountry($playerDto->country),
                 new PlayerSalary($playerDto->salary),
                 new PlayerEmail($playerDto->email),
-                new DateTimeImmutable()
+                new DateTimeImmutable(),
+                $clubId ? ($this->clubRepository->find(new ClubUuid($clubId))) : null
             );
 
             $this->playerRepository->add($player);

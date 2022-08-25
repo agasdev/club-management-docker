@@ -3,7 +3,7 @@ App\Packages\Coach\Domain\Entity\Value\CoachSalary:
     fields:
         value:
             column: salary
-            type: integer
+            type: bigint
             scale: null
             length: null
             unique: false
