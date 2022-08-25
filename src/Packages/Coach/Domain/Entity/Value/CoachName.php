@@ -18,6 +18,13 @@ class CoachName extends CommonNotEmptyString
      */
     public function __construct(string $name, string $surname)
     {
+        if (empty($name)) {
+            throw new InvalidCoachNameException();
+        }
+
+        if (empty($surname)) {
+            throw new InvalidCoachNameException();
+        }
         try {
             $this->name = $name;
             $this->surname = $surname;

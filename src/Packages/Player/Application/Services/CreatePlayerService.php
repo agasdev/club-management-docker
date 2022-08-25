@@ -71,6 +71,7 @@ class CreatePlayerService
                 new PlayerEmail($playerDto->email),
                 new DateTimeImmutable()
             );
+
             $this->playerRepository->add($player);
         } catch (
             InvalidPlayerNameException|
@@ -82,6 +83,6 @@ class CreatePlayerService
             throw new InvalidResourceException();
         }
 
-        return $playerDto;
+        return PlayerDto::assemble($player);
     }
 }

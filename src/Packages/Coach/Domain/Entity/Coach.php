@@ -39,8 +39,8 @@ class Coach
         CoachSalary $salary,
         CoachEmail $email,
         DateTimeImmutable $createdAt,
-        ?DateTimeImmutable $updatedAt,
-        ?Club $club
+        ?DateTimeImmutable $updatedAt = null,
+        ?Club $club = null
     )
     {
         $this->id = $id;
