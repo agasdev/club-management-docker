@@ -5,32 +5,39 @@ declare(strict_types=1);
 namespace App\Packages\Coach\Domain\Entity;
 
 use App\Packages\Club\Domain\Entity\Club;
+use App\Packages\Coach\Domain\Entity\Value\CoachCity;
+use App\Packages\Coach\Domain\Entity\Value\CoachCountry;
+use App\Packages\Coach\Domain\Entity\Value\CoachEmail;
+use App\Packages\Coach\Domain\Entity\Value\CoachName;
+use App\Packages\Coach\Domain\Entity\Value\CoachSalary;
+use App\Packages\Coach\Domain\Entity\Value\CoachUuid;
 use App\Packages\Coach\Infrastructure\Persistence\Doctrine\DoctrineCoachRepository;
+use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DoctrineCoachRepository::class)]
 class Coach
 {
-    private string $id;
-    private string $name;
-    private string $surname;
-    private int $yearOfBirth;
-    private string $city;
-    private string $country;
-    private int $salary;
+    private CoachUuid $id;
+    private CoachName $name;
+    private DateTime $dateOfBirth;
+    private CoachCity $city;
+    private CoachCountry $country;
+    private CoachSalary $salary;
+    private CoachEmail $email;
     private DateTimeImmutable $createdAt;
     private ?DateTimeImmutable $updatedAt;
     private ?Club $club;
 
     public function __construct(
-        string $id,
-        string $name,
-        string $surname,
-        int $yearOfBirth,
-        string $city,
-        string $country,
-        int $salary,
+        CoachUuid $id,
+        CoachName $name,
+        DateTime $dateOfBirth,
+        CoachCity $city,
+        CoachCountry $country,
+        CoachSalary $salary,
+        CoachEmail $email,
         DateTimeImmutable $createdAt,
         ?DateTimeImmutable $updatedAt,
         ?Club $club
@@ -38,38 +45,33 @@ class Coach
     {
         $this->id = $id;
         $this->name = $name;
-        $this->surname = $surname;
-        $this->yearOfBirth = $yearOfBirth;
+        $this->dateOfBirth = $dateOfBirth;
         $this->city = $city;
         $this->country = $country;
         $this->salary = $salary;
+        $this->email = $email;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
         $this->club = $club;
     }
 
 
-    public function getId(): string
+    public function getId(): CoachUuid
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): CoachName
     {
         return $this->name;
     }
 
-    public function getSurname(): string
-    {
-        return $this->surname;
-    }
-
-    public function getCity(): string
+    public function getCity(): CoachCity
     {
         return $this->city;
     }
 
-    public function getCountry(): string
+    public function getCountry(): CoachCountry
     {
         return $this->country;
     }
@@ -84,9 +86,9 @@ class Coach
         return $this->updatedAt;
     }
 
-    public function getYearOfBirth(): int
+    public function getDateOfBirth(): DateTime
     {
-        return $this->yearOfBirth;
+        return $this->dateOfBirth;
     }
 
     public function getClub(): ?Club
@@ -101,8 +103,13 @@ class Coach
         return $this;
     }
 
-    public function getSalary(): int
+    public function getSalary(): CoachSalary
     {
         return $this->salary;
+    }
+
+    public function getEmail(): CoachEmail
+    {
+        return $this->email;
     }
 }

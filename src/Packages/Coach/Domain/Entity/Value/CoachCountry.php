@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace App\Packages\Player\Domain\Entity\Value;
+namespace App\Packages\Coach\Domain\Entity\Value;
 
+use App\Packages\Coach\Domain\Exception\InvalidCoachCountryException;
 use App\Packages\Common\Domain\Exception\InvalidCommonNotEmptyStringException;
 use App\Packages\Common\Domain\Value\CommonNotEmptyString;
-use App\Packages\Player\Domain\Exception\InvalidPlayerCityException;
 
-class PlayerCity extends CommonNotEmptyString
+class CoachCountry extends CommonNotEmptyString
 {
     protected string $value;
 
     /**
-     * @throws InvalidPlayerCityException
+     * @throws InvalidCoachCountryException
      */
     public function __construct(string $value)
     {
         try {
             parent::__construct($value);
         } catch (InvalidCommonNotEmptyStringException) {
-            throw new InvalidPlayerCityException();
+            throw new InvalidCoachCountryException();
         }
     }
 }

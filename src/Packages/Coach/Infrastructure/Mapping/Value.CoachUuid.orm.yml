@@ -1,0 +1,9 @@
+App\Packages\Coach\Domain\Entity\Value\CoachUuid:
+    type: embeddable
+    id:
+        value:
+            column: id
+            type: uuid
+            id: true
+            generator:
+                strategy: IDENTITY

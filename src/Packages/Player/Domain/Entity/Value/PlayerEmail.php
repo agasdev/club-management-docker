@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Packages\Player\Domain\Entity\Value;
 
 use App\Packages\Common\Domain\Exception\InvalidCommonNotEmptyStringException;

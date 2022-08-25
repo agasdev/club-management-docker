@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Packages\Player\Domain\Entity\Value;
+namespace App\Packages\Coach\Domain\Entity\Value;
 
 use App\Packages\Common\Domain\Exception\InvalidCommonNotEmptyStringException;
 use App\Packages\Common\Domain\Value\CommonNotEmptyString;
-use App\Packages\Player\Domain\Exception\InvalidPlayerNameException;
+use App\Packages\Coach\Domain\Exception\InvalidCoachNameException;
 
-class PlayerName extends CommonNotEmptyString
+class CoachName extends CommonNotEmptyString
 {
     private string $name;
     private string $surname;
 
     /**
-     * @throws InvalidPlayerNameException
+     * @throws InvalidCoachNameException
      */
     public function __construct(string $name, string $surname)
     {
@@ -23,7 +23,7 @@ class PlayerName extends CommonNotEmptyString
             $this->surname = $surname;
             parent::__construct(sprintf('%s %s', $this->name, $this->surname));
         } catch (InvalidCommonNotEmptyStringException) {
-            throw new InvalidPlayerNameException();
+            throw new InvalidCoachNameException();
         }
     }
 

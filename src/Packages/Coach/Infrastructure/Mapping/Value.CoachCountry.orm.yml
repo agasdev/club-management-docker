@@ -1,0 +1,11 @@
+App\Packages\Coach\Domain\Entity\Value\CoachCountry:
+    type: embeddable
+    fields:
+        value:
+            column: country
+            type: string
+            scale: null
+            length: 100
+            unique: false
+            nullable: false
+            precision: null
