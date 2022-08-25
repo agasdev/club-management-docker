@@ -4,7 +4,7 @@ App\Packages\Player\Domain\Entity\Player:
     repositoryClass: App\Packages\Player\Infrastructure\Persistence\Doctrine\PlayerRepository
     fields:
         dateOfBirth:
-            type: datetime
+            type: date
             scale: null
             length: null
             unique: false

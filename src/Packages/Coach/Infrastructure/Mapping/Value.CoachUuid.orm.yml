@@ -3,7 +3,5 @@ App\Packages\Coach\Domain\Entity\Value\CoachUuid:
     id:
         value:
             column: id
-            type: uuid
+            type: string
             id: true
-            generator:
-                strategy: IDENTITY

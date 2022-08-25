@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Packages\Player\Domain\Entity\Value;
 
 use App\Packages\Common\Domain\Value\CommonUuid;
-use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @method static PlayerUuid new()
+ */
 class PlayerUuid extends CommonUuid
 {
     protected string $value;

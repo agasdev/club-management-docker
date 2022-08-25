@@ -23,7 +23,7 @@ class Player
     private PlayerCountry $country;
     private PlayerSalary $salary;
     private PlayerEmail $email;
-    private DateTimeImmutable $createdAt;
+    private ?DateTimeImmutable $createdAt;
     private ?DateTimeImmutable $updatedAt;
     private ?Club $club;
 
@@ -36,8 +36,8 @@ class Player
         PlayerSalary $salary,
         PlayerEmail $email,
         DateTimeImmutable $createdAt,
-        ?DateTimeImmutable $updatedAt,
-        ?Club $club
+        ?DateTimeImmutable $updatedAt = null,
+        ?Club $club = null
     )
     {
         $this->id = $id;

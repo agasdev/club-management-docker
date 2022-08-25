@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Packages\Club\Infrastructure\EntryPoint\Api;
 
 use App\Packages\Club\Domain\Entity\Club;
+use App\Packages\Common\Infrastructure\EntryPoint\Api\AbstractApiController;
 use JMS\Serializer\SerializerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-final class CreateClubAction extends AbstractController
+final class CreateClubAction extends AbstractApiController
 {
     public function __construct(private SerializerInterface $serializer)
     {

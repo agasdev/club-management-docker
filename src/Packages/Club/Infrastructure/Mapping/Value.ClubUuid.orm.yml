@@ -3,7 +3,5 @@ App\Packages\Club\Domain\Entity\Value\ClubUuid:
     id:
         value:
             column: id
-            type: uuid
+            type: string
             id: true
-            generator:
-              strategy: IDENTITY

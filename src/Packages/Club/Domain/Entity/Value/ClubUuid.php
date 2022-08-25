@@ -6,6 +6,9 @@ namespace App\Packages\Club\Domain\Entity\Value;
 
 use App\Packages\Common\Domain\Value\CommonUuid;
 
+/**
+ * @method static ClubUuid new()
+ */
 class ClubUuid extends CommonUuid
 {
     protected string $value;

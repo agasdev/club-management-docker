@@ -3,7 +3,5 @@ App\Packages\Player\Domain\Entity\Value\PlayerUuid:
     id:
         value:
             column: id
-            type: uuid
+            type: string
             id: true
-            generator:
-                strategy: IDENTITY

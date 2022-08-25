@@ -4,7 +4,7 @@ App\Packages\Coach\Domain\Entity\Coach:
     repositoryClass: App\Packages\Coach\Infrastructure\Persistence\Doctrine\CoachRepository
     fields:
         dateOfBirth:
-            type: datetime
+            type: date
             scale: null
             length: null
             unique: false
