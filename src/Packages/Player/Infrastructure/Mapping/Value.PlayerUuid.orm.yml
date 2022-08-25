@@ -1,0 +1,9 @@
+App\Packages\Player\Domain\Entity\Value\PlayerUuid:
+    type: embeddable
+    id:
+        value:
+            column: id
+            type: uuid
+            id: true
+            generator:
+                strategy: IDENTITY

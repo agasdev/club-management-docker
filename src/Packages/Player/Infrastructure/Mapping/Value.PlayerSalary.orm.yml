@@ -1,0 +1,11 @@
+App\Packages\Player\Domain\Entity\Value\PlayerSalary:
+    type: embeddable
+    fields:
+        value:
+            column: salary
+            type: integer
+            scale: null
+            length: null
+            unique: false
+            nullable: false
+            precision: null

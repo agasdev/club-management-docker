@@ -1,0 +1,4 @@
+coach_create:
+  path: /coach
+  controller: App\Packages\Coach\Infrastructure\EntryPoint\Api\CreateCoachAction
+  methods: POST

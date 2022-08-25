@@ -1,0 +1,8 @@
+club:
+  resource: '../../../../Club/Application/Resources/config/club_routing.yaml'
+
+coach:
+  resource: '../../../../Coach/Application/Resources/config/coach_routing.yaml'
+
+player:
+  resource: '../../../../Player/Application/Resources/config/player_routing.yaml'

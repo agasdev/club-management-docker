@@ -1,0 +1,4 @@
+player_create:
+  path: /player
+  controller: App\Packages\Player\Infrastructure\EntryPoint\Api\CreatePlayerAction
+  methods: POST

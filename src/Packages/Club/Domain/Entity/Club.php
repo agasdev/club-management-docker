@@ -11,6 +11,7 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Type;
 
 #[ORM\Entity(repositoryClass: DoctrineClubRepository::class)]
 class Club
@@ -20,7 +21,13 @@ class Club
     private string $city;
     private string $country;
     private int $budget;
+    /**
+     * @Type("DateTimeImmutable<'Y-m-d H:i:s'>")
+     */
     private DateTimeImmutable $createdAt;
+    /**
+     * @Type("DateTimeImmutable<'Y-m-d H:i:s'>")
+     */
     private ?DateTimeImmutable $updatedAt;
     private Collection $players;
     private Collection $coaches;
@@ -32,7 +39,7 @@ class Club
         string $country,
         int $budget,
         DateTimeImmutable $createdAt,
-        ?DateTimeImmutable $updatedAt
+        ?DateTimeImmutable $updatedAt = null
     )
     {
         $this->id = $id;

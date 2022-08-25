@@ -2,77 +2,53 @@ App\Packages\Player\Domain\Entity\Player:
     type: entity
     table: player
     repositoryClass: App\Packages\Player\Infrastructure\Persistence\Doctrine\PlayerRepository
-    id:
-        id:
-            type: uuid
-            scale: null
-            length: null
-            unique: true
-            nullable: false
-            precision: null
-            id: true
-            generator:
-                strategy: IDENTITY
     fields:
-        name:
-            type: string
-            scale: null
-            length: 100
-            unique: false
-            nullable: false
-            precision: null
-        surname:
-            type: string
-            scale: null
-            length: 200
-            unique: false
-            nullable: false
-            precision: null
-        yearOfBirth:
-            type: integer
-            scale: null
-            length: null
-            unique: false
-            nullable: false
-            precision: null
-            column: year_of_birth
-        city:
-            type: string
-            scale: null
-            length: 100
-            unique: false
-            nullable: false
-            precision: null
-        country:
-            type: string
-            scale: null
-            length: 100
-            unique: false
-            nullable: false
-            precision: null
-        salary:
-            type: integer
-            scale: null
-            length: null
-            unique: false
-            nullable: false
-            precision: null
-        createdAt:
+        dateOfBirth:
             type: datetime
+            scale: null
+            length: null
+            unique: false
+            nullable: false
+            precision: null
+            column: date_of_birth
+        createdAt:
+            type: datetime_immutable
             scale: null
             length: null
             unique: false
             nullable: false
             precision: null
             column: created_at
+            options:
+                default: CURRENT_TIMESTAMP
         updatedAt:
-            type: datetime
+            type: datetime_immutable
             scale: null
             length: null
             unique: false
             nullable: true
             precision: null
             column: updated_at
+            columnDefinition: DATETIME on update CURRENT_TIMESTAMP
+    embedded:
+        id:
+            class: App\Packages\Player\Domain\Entity\Value\PlayerUuid
+            columnPrefix: false
+        name:
+            class: App\Packages\Player\Domain\Entity\Value\PlayerName
+            columnPrefix: false
+        city:
+            class: App\Packages\Player\Domain\Entity\Value\PlayerCity
+            columnPrefix: false
+        country:
+            class: App\Packages\Player\Domain\Entity\Value\PlayerCountry
+            columnPrefix: false
+        salary:
+            class: App\Packages\Player\Domain\Entity\Value\PlayerSalary
+            columnPrefix: false
+        email:
+            class: App\Packages\Player\Domain\Entity\Value\PlayerEmail
+            columnPrefix: false
     manyToOne:
         club:
             targetEntity: App\Packages\Club\Domain\Entity\Club

@@ -1,0 +1,11 @@
+App\Packages\Player\Domain\Entity\Value\PlayerCity:
+    type: embeddable
+    fields:
+        value:
+            column: city
+            type: string
+            scale: null
+            length: 100
+            unique: false
+            nullable: false
+            precision: null

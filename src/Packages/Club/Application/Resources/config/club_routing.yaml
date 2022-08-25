@@ -1,0 +1,34 @@
+club_create:
+  path: /club
+  controller: App\Packages\Club\Infrastructure\EntryPoint\Api\CreateClubAction
+  methods: POST
+
+club_create_player:
+  path: /club/{id}/player
+  controller: App\Packages\Club\Infrastructure\EntryPoint\Api\CreatePlayerToClubAction
+  methods: POST
+
+club_create_coach:
+  path: /club/{id}/coach
+  controller: App\Packages\Club\Infrastructure\EntryPoint\Api\CreateCoachToClubAction
+  methods: POST
+
+club_update:
+  path: /club/{id}
+  controller: App\Packages\Club\Infrastructure\EntryPoint\Api\UpdateClubAction
+  methods: PATCH
+
+club_delete_player:
+  path: /club/{id}/player/{playerId}
+  controller: App\Packages\Club\Infrastructure\EntryPoint\Api\DeletePlayerFromClubAction
+  methods: DELETE
+
+club_delete_coach:
+  path: /club/{id}/coach/{coachId}
+  controller: App\Packages\Club\Infrastructure\EntryPoint\Api\DeleteCoachFromClubAction
+  methods: DELETE
+
+club_list_players:
+  path: /club/{id}/players
+  controller: App\Packages\Club\Infrastructure\EntryPoint\Api\ListClubPlayersAction
+  methods: GET

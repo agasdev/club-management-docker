@@ -5,32 +5,36 @@ declare(strict_types=1);
 namespace App\Packages\Player\Domain\Entity;
 
 use App\Packages\Club\Domain\Entity\Club;
-use App\Packages\Player\Infrastructure\Persistence\Doctrine\DoctrinePlayerRepository;
+use App\Packages\Player\Domain\Entity\Value\PlayerCity;
+use App\Packages\Player\Domain\Entity\Value\PlayerCountry;
+use App\Packages\Player\Domain\Entity\Value\PlayerEmail;
+use App\Packages\Player\Domain\Entity\Value\PlayerName;
+use App\Packages\Player\Domain\Entity\Value\PlayerSalary;
+use App\Packages\Player\Domain\Entity\Value\PlayerUuid;
+use DateTime;
 use DateTimeImmutable;
-use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DoctrinePlayerRepository::class)]
 class Player
 {
-    private string $id;
-    private string $name;
-    private string $surname;
-    private int $yearOfBirth;
-    private string $city;
-    private string $country;
-    private int $salary;
+    private PlayerUuid $id;
+    private PlayerName $name;
+    private DateTime $dateOfBirth;
+    private PlayerCity $city;
+    private PlayerCountry $country;
+    private PlayerSalary $salary;
+    private PlayerEmail $email;
     private DateTimeImmutable $createdAt;
     private ?DateTimeImmutable $updatedAt;
     private ?Club $club;
 
     public function __construct(
-        string $id,
-        string $name,
-        string $surname,
-        int $yearOfBirth,
-        string $city,
-        string $country,
-        int $salary,
+        PlayerUuid $id,
+        PlayerName $name,
+        DateTime $dateOfBirth,
+        PlayerCity $city,
+        PlayerCountry $country,
+        PlayerSalary $salary,
+        PlayerEmail $email,
         DateTimeImmutable $createdAt,
         ?DateTimeImmutable $updatedAt,
         ?Club $club
@@ -38,38 +42,33 @@ class Player
     {
         $this->id = $id;
         $this->name = $name;
-        $this->surname = $surname;
-        $this->yearOfBirth = $yearOfBirth;
+        $this->dateOfBirth = $dateOfBirth;
         $this->city = $city;
         $this->country = $country;
         $this->salary = $salary;
+        $this->email = $email;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
         $this->club = $club;
     }
 
 
-    public function getId(): string
+    public function getId(): PlayerUuid
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): PlayerName
     {
         return $this->name;
     }
 
-    public function getSurname(): string
-    {
-        return $this->surname;
-    }
-
-    public function getCity(): string
+    public function getCity(): PlayerCity
     {
         return $this->city;
     }
 
-    public function getCountry(): string
+    public function getCountry(): PlayerCountry
     {
         return $this->country;
     }
@@ -84,9 +83,9 @@ class Player
         return $this->updatedAt;
     }
 
-    public function getYearOfBirth(): int
+    public function getDateOfBirth(): DateTime
     {
-        return $this->yearOfBirth;
+        return $this->dateOfBirth;
     }
 
     public function getClub(): ?Club
@@ -101,8 +100,13 @@ class Player
         return $this;
     }
 
-    public function getSalary(): ?int
+    public function getSalary(): PlayerSalary
     {
         return $this->salary;
+    }
+
+    public function getEmail(): PlayerEmail
+    {
+        return $this->email;
     }
 }

@@ -49,32 +49,32 @@ class Coach
     }
 
 
-    public function getId(): ?int
+    public function getId(): string
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function getSurname(): ?string
+    public function getSurname(): string
     {
         return $this->surname;
     }
 
-    public function getCity(): ?string
+    public function getCity(): string
     {
         return $this->city;
     }
 
-    public function getCountry(): ?string
+    public function getCountry(): string
     {
         return $this->country;
     }
 
-    public function getCreatedAt(): ?DateTimeImmutable
+    public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
     }
@@ -84,7 +84,7 @@ class Coach
         return $this->updatedAt;
     }
 
-    public function getYearOfBirth(): ?int
+    public function getYearOfBirth(): int
     {
         return $this->yearOfBirth;
     }
@@ -101,7 +101,7 @@ class Coach
         return $this;
     }
 
-    public function getSalary(): ?int
+    public function getSalary(): int
     {
         return $this->salary;
     }
