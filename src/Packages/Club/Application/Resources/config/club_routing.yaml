@@ -16,7 +16,7 @@ club_create_coach:
 club_update:
   path: /club/{id}
   controller: App\Packages\Club\Infrastructure\EntryPoint\Api\UpdateClubAction
-  methods: PATCH
+  methods: PUT|PATCH
 
 club_delete_player:
   path: /club/{id}/player/{playerId}

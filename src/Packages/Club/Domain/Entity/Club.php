@@ -42,9 +42,7 @@ class Club
         ClubName $name,
         ClubCity $city,
         ClubCountry $country,
-        ClubBudget $budget,
-        DateTimeImmutable $createdAt,
-        ?DateTimeImmutable $updatedAt = null
+        ClubBudget $budget
     )
     {
         $this->id = $id;
@@ -52,8 +50,6 @@ class Club
         $this->city = $city;
         $this->country = $country;
         $this->budget = $budget;
-        $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
         $this->players = new ArrayCollection();
         $this->coaches = new ArrayCollection();
     }
@@ -151,5 +147,28 @@ class Club
         }
 
         return $this;
+    }
+
+    public function onPrePersist()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
+
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new DateTimeImmutable();
+    }
+
+    public function update(
+        ClubName $name,
+        ClubCity $city,
+        ClubCountry $country,
+        ClubBudget $budget
+    ): void
+    {
+        $this->name = $name;
+        $this->city = $city;
+        $this->country = $country;
+        $this->budget = $budget;
     }
 }

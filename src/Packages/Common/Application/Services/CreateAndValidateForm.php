@@ -21,11 +21,12 @@ class CreateAndValidateForm
     public function __invoke(
         Request $request,
         string $class,
-        mixed $dto
+        mixed $dto,
+        bool $clearMissing = true
     )
     {
         $form = $this->formFactory->create($class, $dto);
-        $form->submit(json_decode($request->getContent(), true));
+        $form->submit(json_decode($request->getContent(), true), $clearMissing);
         if (!$form->isValid()) {
             throw new InvalidResourceException(json_encode([
                 'type' => 'validation_error',

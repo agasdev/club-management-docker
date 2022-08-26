@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Packages\Club\Application\Services;
 
-use App\Packages\Club\Application\DTO\ClubDto;
+use App\Packages\Club\Domain\Entity\Club;
 use App\Packages\Club\Domain\Entity\Value\ClubUuid;
 use App\Packages\Club\Domain\Repository\ClubRepository;
 use App\Packages\Common\Application\Exception\ResourceNotFoundException;
@@ -21,7 +21,7 @@ class GetClubService
     /**
      * @throws ResourceNotFoundException
      */
-    public function __invoke(string $id): ClubDto
+    public function __invoke(string $id): Club
     {
         try {
             $club = $this->clubRepository->find(new ClubUuid($id));
@@ -33,7 +33,7 @@ class GetClubService
             throw new ResourceNotFoundException();
         }
 
-        return ClubDto::assemble($club);
+        return $club;
     }
 
 }

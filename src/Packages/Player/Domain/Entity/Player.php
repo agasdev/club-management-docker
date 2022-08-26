@@ -23,7 +23,7 @@ class Player
     private PlayerCountry $country;
     private PlayerSalary $salary;
     private PlayerEmail $email;
-    private ?DateTimeImmutable $createdAt;
+    private DateTimeImmutable $createdAt;
     private ?DateTimeImmutable $updatedAt;
     private ?Club $club;
 
@@ -35,9 +35,7 @@ class Player
         PlayerCountry $country,
         PlayerSalary $salary,
         PlayerEmail $email,
-        DateTimeImmutable $createdAt,
         ?Club $club = null,
-        ?DateTimeImmutable $updatedAt = null
     )
     {
         $this->id = $id;
@@ -47,9 +45,7 @@ class Player
         $this->country = $country;
         $this->salary = $salary;
         $this->email = $email;
-        $this->createdAt = $createdAt;
         $this->club = $club;
-        $this->updatedAt = $updatedAt;
     }
 
 
@@ -108,5 +104,15 @@ class Player
     public function getEmail(): PlayerEmail
     {
         return $this->email;
+    }
+
+    public function onPrePersist()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
+
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new DateTimeImmutable();
     }
 }

@@ -68,7 +68,6 @@ class CreateCoachService
                 new CoachCountry($coachDto->country),
                 new CoachSalary($coachDto->salary),
                 new CoachEmail($coachDto->email),
-                new DateTimeImmutable(),
                 $clubId ? ($this->clubRepository->find(new ClubUuid($clubId))) : null
             );
 

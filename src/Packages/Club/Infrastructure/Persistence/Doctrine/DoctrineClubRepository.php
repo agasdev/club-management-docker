@@ -30,6 +30,11 @@ class DoctrineClubRepository implements ClubRepository
         $this->doctrineRepository->flush($club);
     }
 
+    public function update(Club $club): void
+    {
+        $this->doctrineRepository->flush($club);
+    }
+
     public function findOneByName(ClubName $name): ?Club
     {
         return $this->doctrineRepository->findOneBy(['name.value' => $name->value()]);

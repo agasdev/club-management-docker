@@ -38,9 +38,7 @@ class Coach
         CoachCountry $country,
         CoachSalary $salary,
         CoachEmail $email,
-        DateTimeImmutable $createdAt,
         ?Club $club = null,
-        ?DateTimeImmutable $updatedAt = null
     )
     {
         $this->id = $id;
@@ -50,9 +48,7 @@ class Coach
         $this->country = $country;
         $this->salary = $salary;
         $this->email = $email;
-        $this->createdAt = $createdAt;
         $this->club = $club;
-        $this->updatedAt = $updatedAt;
     }
 
 
@@ -111,5 +107,15 @@ class Coach
     public function getEmail(): CoachEmail
     {
         return $this->email;
+    }
+
+    public function onPrePersist()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
+
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new DateTimeImmutable();
     }
 }

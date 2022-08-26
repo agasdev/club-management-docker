@@ -60,4 +60,6 @@ App\Packages\Player\Domain\Entity\Player:
                 club_id:
                     referencedColumnName: id
             orphanRemoval: false
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [ onPrePersist ]
+        preUpdate: [ onPreUpdate ]

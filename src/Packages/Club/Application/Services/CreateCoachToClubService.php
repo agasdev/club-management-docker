@@ -32,9 +32,9 @@ class CreateCoachToClubService
      */
     public function __invoke(string $id, Request $request): CoachDto
     {
-        $clubDto = ($this->getClubService)($id);
+        $club = ($this->getClubService)($id);
 
-        if (0 > ($this->netClubBudgetService)($id, $clubDto->budget, (int)$request->get('salary'))) {
+        if (0 > ($this->netClubBudgetService)($id, $club->getBudget()->value(), (int)$request->get('salary'))) {
             throw new InsufficientBudgetException();
         }
 

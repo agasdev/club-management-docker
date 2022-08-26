@@ -26,7 +26,6 @@ use App\Packages\Player\Domain\Exception\InvalidPlayerNameException;
 use App\Packages\Player\Domain\Exception\InvalidPlayerSalaryException;
 use App\Packages\Player\Domain\Repository\PlayerRepository;
 use DateTime;
-use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\Request;
 
 class CreatePlayerService
@@ -70,7 +69,6 @@ class CreatePlayerService
                 new PlayerCountry($playerDto->country),
                 new PlayerSalary($playerDto->salary),
                 new PlayerEmail($playerDto->email),
-                new DateTimeImmutable(),
                 $clubId ? ($this->clubRepository->find(new ClubUuid($clubId))) : null
             );
 

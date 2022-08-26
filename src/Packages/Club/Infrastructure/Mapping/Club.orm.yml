@@ -55,4 +55,6 @@ App\Packages\Club\Domain\Entity\Club:
             inversedBy: null
             orphanRemoval: false
             orderBy: null
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [ onPrePersist ]
+        preUpdate: [ onPreUpdate ]
