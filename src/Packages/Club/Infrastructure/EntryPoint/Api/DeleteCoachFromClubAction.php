@@ -25,12 +25,12 @@ class DeleteCoachFromClubAction extends AbstractApiController
             ($this->deleteCoachClubService)($id, $coachId);
         } catch (CoachNotFoundInClubException) {
             return $this->sendError(
-                sprintf('Club with id: %s not found', $id),
+                sprintf('Coach with id: %s not found in club', $coachId),
                 Response::HTTP_NOT_FOUND
             );
         } catch (ResourceNotFoundException) {
             return $this->sendError(
-                sprintf('Player with id: %s not found in club', $coachId),
+                sprintf('Club with id: %s not found', $id),
                 Response::HTTP_NOT_FOUND
             );
         }

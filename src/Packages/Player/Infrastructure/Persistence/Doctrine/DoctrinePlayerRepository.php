@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Packages\Player\Infrastructure\Persistence\Doctrine;
 
+use App\Packages\Club\Domain\Entity\Value\ClubUuid;
 use App\Packages\Common\Infrastructure\Repository\DoctrineRepository;
 use App\Packages\Player\Domain\Entity\Player;
 use App\Packages\Player\Domain\Entity\Value\PlayerEmail;
-use App\Packages\Player\Domain\Entity\Value\PlayerUuid;
 use App\Packages\Player\Domain\Repository\PlayerRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -34,5 +34,14 @@ class DoctrinePlayerRepository implements PlayerRepository
     public function findOneByEmail(PlayerEmail $email): ?Player
     {
         return $this->doctrineRepository->findOneBy(['email.value' => $email->value()]);
+    }
+
+    public function findByClubId(ClubUuid $clubId): array
+    {
+        return $this->doctrineRepository->createQueryBuilder('p')
+            ->andWhere('p.club = :clubId')
+            ->setParameter('clubId', $clubId->value())
+            ->getQuery()
+            ->execute();
     }
 }
