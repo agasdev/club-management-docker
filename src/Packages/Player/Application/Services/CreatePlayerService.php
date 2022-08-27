@@ -67,7 +67,7 @@ class CreatePlayerService
                 new DateTime($playerDto->dateOfBirth),
                 new PlayerCity($playerDto->city),
                 new PlayerCountry($playerDto->country),
-                new PlayerSalary($playerDto->salary),
+                !is_null($playerDto->salary) ? new PlayerSalary($playerDto->salary) : null,
                 new PlayerEmail($playerDto->email),
                 $clubId ? ($this->clubRepository->find(new ClubUuid($clubId))) : null
             );

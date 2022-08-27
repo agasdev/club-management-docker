@@ -66,7 +66,7 @@ class CreateCoachService
                 new DateTime($coachDto->dateOfBirth),
                 new CoachCity($coachDto->city),
                 new CoachCountry($coachDto->country),
-                new CoachSalary($coachDto->salary),
+                !is_null($coachDto->salary) ? new CoachSalary($coachDto->salary) : null,
                 new CoachEmail($coachDto->email),
                 $clubId ? ($this->clubRepository->find(new ClubUuid($clubId))) : null
             );

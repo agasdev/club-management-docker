@@ -22,7 +22,6 @@ App\Packages\Coach\Application\DTO\CoachDto:
         country:
             - NotBlank: ~
         salary:
-            - NotBlank: ~
             - Positive: ~
         email:
             - NotBlank: ~

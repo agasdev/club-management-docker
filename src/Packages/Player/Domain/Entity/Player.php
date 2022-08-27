@@ -21,7 +21,7 @@ class Player
     private DateTime $dateOfBirth;
     private PlayerCity $city;
     private PlayerCountry $country;
-    private PlayerSalary $salary;
+    private ?PlayerSalary $salary;
     private PlayerEmail $email;
     private DateTimeImmutable $createdAt;
     private ?DateTimeImmutable $updatedAt;
@@ -33,7 +33,7 @@ class Player
         DateTime $dateOfBirth,
         PlayerCity $city,
         PlayerCountry $country,
-        PlayerSalary $salary,
+        ?PlayerSalary $salary,
         PlayerEmail $email,
         ?Club $club = null,
     )
@@ -96,7 +96,7 @@ class Player
         return $this;
     }
 
-    public function getSalary(): PlayerSalary
+    public function getSalary(): ?PlayerSalary
     {
         return $this->salary;
     }

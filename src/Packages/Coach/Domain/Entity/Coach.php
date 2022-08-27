@@ -24,7 +24,7 @@ class Coach
     private DateTime $dateOfBirth;
     private CoachCity $city;
     private CoachCountry $country;
-    private CoachSalary $salary;
+    private ?CoachSalary $salary;
     private CoachEmail $email;
     private DateTimeImmutable $createdAt;
     private ?DateTimeImmutable $updatedAt;
@@ -36,7 +36,7 @@ class Coach
         DateTime $dateOfBirth,
         CoachCity $city,
         CoachCountry $country,
-        CoachSalary $salary,
+        ?CoachSalary $salary,
         CoachEmail $email,
         ?Club $club = null,
     )
@@ -99,7 +99,7 @@ class Coach
         return $this;
     }
 
-    public function getSalary(): CoachSalary
+    public function getSalary(): ?CoachSalary
     {
         return $this->salary;
     }

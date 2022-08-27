@@ -7,5 +7,5 @@ App\Packages\Player\Domain\Entity\Value\PlayerSalary:
             scale: null
             length: null
             unique: false
-            nullable: false
+            nullable: true
             precision: null

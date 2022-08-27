@@ -22,7 +22,6 @@ App\Packages\Player\Application\DTO\PlayerDto:
         country:
             - NotBlank: ~
         salary:
-            - NotBlank: ~
             - Positive: ~
         email:
             - NotBlank: ~

@@ -49,7 +49,7 @@ class PlayerDto
             $player->getDateOfBirth()->format('d/m/Y'),
             $player->getCity()->value(),
             $player->getCountry()->value(),
-            $player->getSalary()->value(),
+            $player->getSalary()?->value(),
             $player->getEmail()->value(),
             $player->getClub() ? ClubDto::assemble($player->getClub()) : null
         );

@@ -49,7 +49,7 @@ class CoachDto
             $coach->getDateOfBirth()->format('d/m/Y'),
             $coach->getCity()->value(),
             $coach->getCountry()->value(),
-            $coach->getSalary()->value(),
+            $coach->getSalary()?->value(),
             $coach->getEmail()->value(),
             $coach->getClub() ? ClubDto::assemble($coach->getClub()) : null
         );

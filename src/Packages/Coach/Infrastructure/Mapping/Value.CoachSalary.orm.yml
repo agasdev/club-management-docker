@@ -7,5 +7,5 @@ App\Packages\Coach\Domain\Entity\Value\CoachSalary:
             scale: null
             length: null
             unique: false
-            nullable: false
+            nullable: true
             precision: null
