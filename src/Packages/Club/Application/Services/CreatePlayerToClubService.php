@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Packages\Club\Application\Services;
 
 use App\Packages\Club\Application\Exception\InsufficientBudgetException;
+use App\Packages\Club\Application\Exception\RequiredSalaryFieldException;
 use App\Packages\Common\Application\Exception\InvalidResourceException;
 use App\Packages\Common\Application\Exception\ResourceNotFoundException;
 use App\Packages\Player\Application\DTO\PlayerDto;
@@ -29,10 +30,15 @@ class CreatePlayerToClubService
      * @throws ResourceNotFoundException
      * @throws InvalidPlayerFormException
      * @throws PlayerAlreadyExistException
+     * @throws RequiredSalaryFieldException
      */
     public function __invoke(string $id, Request $request): PlayerDto
     {
         $club = ($this->getClubService)($id);
+
+        if (empty($request->get('salary'))) {
+            throw new RequiredSalaryFieldException();
+        }
 
         if (0 > ($this->netClubBudgetService)($id, $club->getBudget()->value(), (int)$request->get('salary'))) {
             throw new InsufficientBudgetException();

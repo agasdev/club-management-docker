@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Packages\Club\Infrastructure\EntryPoint\Api;
 
 use App\Packages\Club\Application\Exception\InsufficientBudgetException;
+use App\Packages\Club\Application\Exception\RequiredSalaryFieldException;
 use App\Packages\Club\Application\Services\CreateCoachToClubService;
 use App\Packages\Coach\Application\Exception\CoachAlreadyExistException;
 use App\Packages\Coach\Application\Exception\InvalidCoachFormException;
@@ -39,6 +40,8 @@ final class CreateCoachToClubAction extends AbstractApiController
             return $this->sendError('Club don\'t have enough budget', Response::HTTP_BAD_REQUEST);
         } catch (ResourceNotFoundException) {
             return $this->sendError(sprintf('Club with id: %s not found', $id), Response::HTTP_NOT_FOUND);
+        } catch (RequiredSalaryFieldException $e) {
+            return $this->sendError('Required salary field', Response::HTTP_BAD_REQUEST);
         }
 
         return $this->json(
