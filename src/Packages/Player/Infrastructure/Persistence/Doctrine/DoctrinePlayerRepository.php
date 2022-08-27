@@ -7,6 +7,7 @@ namespace App\Packages\Player\Infrastructure\Persistence\Doctrine;
 use App\Packages\Common\Infrastructure\Repository\DoctrineRepository;
 use App\Packages\Player\Domain\Entity\Player;
 use App\Packages\Player\Domain\Entity\Value\PlayerEmail;
+use App\Packages\Player\Domain\Entity\Value\PlayerUuid;
 use App\Packages\Player\Domain\Repository\PlayerRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -22,6 +23,11 @@ class DoctrinePlayerRepository implements PlayerRepository
     public function add(Player $player): void
     {
         $this->doctrineRepository->persist($player);
+        $this->doctrineRepository->flush($player);
+    }
+
+    public function update(Player $player): void
+    {
         $this->doctrineRepository->flush($player);
     }
 

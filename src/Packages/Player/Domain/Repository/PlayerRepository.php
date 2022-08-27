@@ -10,5 +10,6 @@ use App\Packages\Player\Domain\Entity\Value\PlayerEmail;
 interface PlayerRepository
 {
     public function add(Player $player): void;
-    public  function findOneByEmail(PlayerEmail $email): ?Player;
+    public function update(Player $player): void;
+    public function findOneByEmail(PlayerEmail $email): ?Player;
 }
