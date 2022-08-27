@@ -25,6 +25,11 @@ class DoctrineCoachRepository implements CoachRepository
         $this->doctrineRepository->flush($coach);
     }
 
+    public function update(Coach $coach): void
+    {
+        $this->doctrineRepository->flush($coach);
+    }
+
     public function findOneByEmail(CoachEmail $email): ?Coach
     {
         return $this->doctrineRepository->findOneBy(['email.value' => $email->value()]);

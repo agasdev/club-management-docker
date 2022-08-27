@@ -10,5 +10,6 @@ use App\Packages\Coach\Domain\Entity\Value\CoachEmail;
 interface CoachRepository
 {
     public function add(Coach $coach): void;
+    public function update(Coach $coach): void;
     public function findOneByEmail(CoachEmail $email): ?Coach;
 }
