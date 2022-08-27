@@ -9,6 +9,7 @@ use App\Packages\Common\Infrastructure\Repository\DoctrineRepository;
 use App\Packages\Player\Application\DTO\PlayerDto;
 use App\Packages\Player\Domain\Entity\Player;
 use App\Packages\Player\Domain\Entity\Value\PlayerEmail;
+use App\Packages\Player\Domain\Entity\Value\PlayerUuid;
 use App\Packages\Player\Domain\Repository\PlayerRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -31,6 +32,11 @@ class DoctrinePlayerRepository implements PlayerRepository
     public function update(Player $player): void
     {
         $this->doctrineRepository->flush($player);
+    }
+
+    public function find(PlayerUuid $id): ?Player
+    {
+        return $this->doctrineRepository->find($id->value());
     }
 
     public function findOneByEmail(PlayerEmail $email): ?Player
@@ -81,6 +87,14 @@ class DoctrinePlayerRepository implements PlayerRepository
         ];
     }
 
+    public function findOneByClubIdAndId(ClubUuid $clubId, PlayerUuid $id): ?Player
+    {
+        return $this->doctrineRepository->findOneBy([
+            'club' => $clubId->value(),
+            'id.value' => $id->value()
+        ]);
+    }
+
     private function addSearchQuery(QueryBuilder $queryBuilder, string $search): void
     {
         if (empty($search)) {
@@ -102,7 +116,7 @@ class DoctrinePlayerRepository implements PlayerRepository
             $row['id'],
             $row['name'],
             $row['surname'],
-            $row['dateOfBirth']->format('d/m/Y'),
+            $row['dateOfBirth']->format('Y-m-d'),
             $row['city'],
             $row['country'],
             (int)$row['salary'],

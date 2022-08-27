@@ -11,7 +11,7 @@ use App\Packages\Common\Infrastructure\EntryPoint\Api\AbstractApiController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class DeleteCoachFromClubAction extends AbstractApiController
+final class DeleteCoachFromClubAction extends AbstractApiController
 {
     public function __construct(
         private DeleteCoachClubService $deleteCoachClubService

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ListClubPlayersAction extends AbstractApiController
+final class ListClubPlayersAction extends AbstractApiController
 {
     public function __construct(
         private SerializerInterface $serializer,

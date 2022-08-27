@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CreatePlayerAction extends AbstractApiController
+final class CreatePlayerAction extends AbstractApiController
 {
     public function __construct(
         private SerializerInterface $serializer,

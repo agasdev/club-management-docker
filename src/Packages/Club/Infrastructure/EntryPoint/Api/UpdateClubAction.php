@@ -32,9 +32,9 @@ final class UpdateClubAction extends AbstractApiController
             return $this->sendError('Insufficient budget', Response::HTTP_BAD_REQUEST);
         } catch (InvalidClubFormException $e) {
             return $this->json(json_decode($e->getMessage(), true), Response::HTTP_BAD_REQUEST);
-        } catch (InvalidResourceException $e) {
+        } catch (InvalidResourceException) {
             return $this->sendError('Invalid some club resource', Response::HTTP_BAD_REQUEST);
-        } catch (ResourceNotFoundException $e) {
+        } catch (ResourceNotFoundException) {
             return $this->sendError(
                 sprintf('Club with id: %s not found', $id),
                 Response::HTTP_NOT_FOUND

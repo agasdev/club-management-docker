@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\Serializer\SerializerInterface;
 
-class CreateCoachAction extends AbstractApiController
+final class CreateCoachAction extends AbstractApiController
 {
     public function __construct(
         private SerializerInterface $serializer,

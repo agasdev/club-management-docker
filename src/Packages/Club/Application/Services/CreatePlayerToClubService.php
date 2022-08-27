@@ -18,7 +18,7 @@ class CreatePlayerToClubService
 {
     public function __construct(
         private GetClubService $getClubService,
-        private GetNetClubBudgetService $netClubBudgetService,
+        private GetNetClubBudgetService $getNetClubBudgetService,
         private CreatePlayerService $createPlayerService
     )
     {
@@ -36,11 +36,11 @@ class CreatePlayerToClubService
     {
         $club = ($this->getClubService)($id);
 
-        if (empty($request->get('salary'))) {
+        if (empty($salary = $request->get('salary'))) {
             throw new RequiredSalaryFieldException();
         }
 
-        if (0 > ($this->netClubBudgetService)($id, $club->getBudget()->value(), (int)$request->get('salary'))) {
+        if (0 > ($this->getNetClubBudgetService)($id, $club->getBudget()->value(), (int)$salary)) {
             throw new InsufficientBudgetException();
         }
 

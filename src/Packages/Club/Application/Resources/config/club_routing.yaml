@@ -8,10 +8,20 @@ club_create_player:
   controller: App\Packages\Club\Infrastructure\EntryPoint\Api\CreatePlayerToClubAction
   methods: POST
 
+club_add_player:
+  path: /club/{id}/player/{playerId}
+  controller: App\Packages\Club\Infrastructure\EntryPoint\Api\AddPlayerToClubAction
+  methods: PATCH
+
 club_create_coach:
   path: /club/{id}/coach
   controller: App\Packages\Club\Infrastructure\EntryPoint\Api\CreateCoachToClubAction
   methods: POST
+
+club_add_coach:
+  path: /club/{id}/coach/{coachId}
+  controller: App\Packages\Club\Infrastructure\EntryPoint\Api\AddCoachToClubAction
+  methods: PATCH
 
 club_update:
   path: /club/{id}

@@ -46,7 +46,7 @@ class PlayerDto
             $player->getId()->value(),
             $player->getName()->name(),
             $player->getName()->surname(),
-            $player->getDateOfBirth()->format('d/m/Y'),
+            $player->getDateOfBirth()->format('Y-m-d'),
             $player->getCity()->value(),
             $player->getCountry()->value(),
             $player->getSalary()?->value(),

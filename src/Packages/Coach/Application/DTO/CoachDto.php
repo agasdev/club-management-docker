@@ -46,7 +46,7 @@ class CoachDto
             $coach->getId()->value(),
             $coach->getName()->name(),
             $coach->getName()->surname(),
-            $coach->getDateOfBirth()->format('d/m/Y'),
+            $coach->getDateOfBirth()->format('Y-m-d'),
             $coach->getCity()->value(),
             $coach->getCountry()->value(),
             $coach->getSalary()?->value(),

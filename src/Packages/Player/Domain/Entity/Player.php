@@ -115,4 +115,23 @@ class Player
     {
         $this->updatedAt = new DateTimeImmutable();
     }
+
+    public function update(
+        PlayerName $name,
+        DateTime $dateOfBirth,
+        PlayerCity $city,
+        PlayerCountry $country,
+        ?PlayerSalary $salary,
+        PlayerEmail $email,
+        ?Club $club = null
+    ): void
+    {
+        $this->name = $name;
+        $this->dateOfBirth = $dateOfBirth;
+        $this->city = $city;
+        $this->country = $country;
+        $this->salary = $salary;
+        $this->email = $email;
+        $this->club = $club;
+    }
 }
