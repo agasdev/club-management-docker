@@ -24,7 +24,7 @@ class ListClubPlayersAction extends AbstractApiController
     public function __invoke(string $id, Request $request): JsonResponse
     {
         try {
-            $response = ($this->getClubPlayersService)($id);
+            $response = ($this->getClubPlayersService)($id, $request);
         } catch (ResourceNotFoundException) {
             return $this->sendError(sprintf('Club with id: %s not found', $id), Response::HTTP_NOT_FOUND);
         }

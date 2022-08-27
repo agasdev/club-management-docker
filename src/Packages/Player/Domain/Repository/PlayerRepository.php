@@ -13,5 +13,5 @@ interface PlayerRepository
     public function add(Player $player): void;
     public function update(Player $player): void;
     public function findOneByEmail(PlayerEmail $email): ?Player;
-    public function findByClubId(ClubUuid $clubId): array;
+    public function findByClubId(ClubUuid $clubId, int $page, int $itemsPerPage, string $search): array;
 }
