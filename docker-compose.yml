@@ -51,6 +51,16 @@ services:
     networks:
       - club-management-network
 
+  club-management-mailhog:
+    container_name: club-management-mailhog
+    image: mailhog/mailhog
+    restart: always
+    ports:
+      - '8025:8025'
+      - '1025:1025'
+    networks:
+      - club-management-network
+
 networks:
   club-management-network:
 
