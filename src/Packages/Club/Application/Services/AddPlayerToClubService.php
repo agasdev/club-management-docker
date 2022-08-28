@@ -9,6 +9,7 @@ use App\Packages\Club\Application\Exception\RequiredSalaryFieldException;
 use App\Packages\Common\Application\Exception\InvalidResourceException;
 use App\Packages\Common\Application\Exception\ResourceNotFoundException;
 use App\Packages\Common\Application\Services\CreateAndValidateForm;
+use App\Packages\Common\Application\Services\SendEmail;
 use App\Packages\Player\Application\DTO\PlayerDto;
 use App\Packages\Player\Application\Exception\InvalidPlayerFormException;
 use App\Packages\Player\Application\Form\Type\PlayerFormType;
@@ -34,7 +35,8 @@ class AddPlayerToClubService
         private GetPlayerService $getPlayerService,
         private GetNetClubBudgetService $getNetClubBudgetService,
         private CreateAndValidateForm $createAndValidateForm,
-        private PlayerRepository $playerRepository
+        private PlayerRepository $playerRepository,
+        private SendEmail $sendEmail
     )
     {
     }
@@ -94,7 +96,8 @@ class AddPlayerToClubService
             throw new InvalidResourceException();
         }
 
+        ($this->sendEmail)($player, 'add');
+
         return PlayerDto::assemble($player);
     }
-
 }

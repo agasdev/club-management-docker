@@ -8,6 +8,7 @@ use App\Packages\Club\Domain\Entity\Value\ClubUuid;
 use App\Packages\Club\Domain\Repository\ClubRepository;
 use App\Packages\Common\Application\Exception\InvalidResourceException;
 use App\Packages\Common\Application\Services\CreateAndValidateForm;
+use App\Packages\Common\Application\Services\SendEmail;
 use App\Packages\Player\Application\DTO\PlayerDto;
 use App\Packages\Player\Application\Exception\InvalidPlayerFormException;
 use App\Packages\Player\Application\Exception\PlayerAlreadyExistException;
@@ -34,7 +35,8 @@ class CreatePlayerService
     public function __construct(
         private CreateAndValidateForm $createAndValidateForm,
         private PlayerRepository $playerRepository,
-        private ClubRepository $clubRepository
+        private ClubRepository $clubRepository,
+        private SendEmail $sendEmail
     )
     {
     }
@@ -81,6 +83,10 @@ class CreatePlayerService
             InvalidPlayerEmailException
         ) {
             throw new InvalidResourceException();
+        }
+
+        if (!is_null($clubId)) {
+            ($this->sendEmail)($player, 'add');
         }
 
         return PlayerDto::assemble($player);

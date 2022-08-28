@@ -24,6 +24,7 @@ use App\Packages\Coach\Domain\Repository\CoachRepository;
 use App\Packages\Common\Application\Exception\InvalidResourceException;
 use App\Packages\Common\Application\Exception\ResourceNotFoundException;
 use App\Packages\Common\Application\Services\CreateAndValidateForm;
+use App\Packages\Common\Application\Services\SendEmail;
 use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -34,7 +35,8 @@ class AddCoachToClubService
         private GetCoachService $getCoachService,
         private GetNetClubBudgetService $getNetClubBudgetService,
         private CreateAndValidateForm $createAndValidateForm,
-        private CoachRepository $coachRepository
+        private CoachRepository $coachRepository,
+        private SendEmail $sendEmail
     )
     {
     }
@@ -93,6 +95,8 @@ class AddCoachToClubService
         ) {
             throw new InvalidResourceException();
         }
+
+        ($this->sendEmail)($coach, 'add');
 
         return CoachDto::assemble($coach);
     }

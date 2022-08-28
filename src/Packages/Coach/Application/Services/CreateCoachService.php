@@ -23,8 +23,8 @@ use App\Packages\Coach\Domain\Exception\InvalidCoachSalaryException;
 use App\Packages\Coach\Domain\Repository\CoachRepository;
 use App\Packages\Common\Application\Exception\InvalidResourceException;
 use App\Packages\Common\Application\Services\CreateAndValidateForm;
+use App\Packages\Common\Application\Services\SendEmail;
 use DateTime;
-use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\Request;
 
 class CreateCoachService
@@ -32,7 +32,8 @@ class CreateCoachService
     public function __construct(
         private CreateAndValidateForm $createAndValidateForm,
         private CoachRepository $coachRepository,
-        private ClubRepository $clubRepository
+        private ClubRepository $clubRepository,
+        private SendEmail $sendEmail
     )
     {
     }
@@ -80,6 +81,10 @@ class CreateCoachService
             InvalidCoachEmailException
         ) {
             throw new InvalidResourceException();
+        }
+
+        if (!is_null($clubId)) {
+            ($this->sendEmail)($coach, 'add');
         }
 
         return CoachDto::assemble($coach);

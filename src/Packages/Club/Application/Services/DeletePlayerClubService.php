@@ -6,6 +6,7 @@ namespace App\Packages\Club\Application\Services;
 
 use App\Packages\Club\Application\Exception\PlayerNotFoundInClubException;
 use App\Packages\Common\Application\Exception\ResourceNotFoundException;
+use App\Packages\Common\Application\Services\SendEmail;
 use App\Packages\Player\Domain\Repository\PlayerRepository;
 
 class DeletePlayerClubService
@@ -13,7 +14,8 @@ class DeletePlayerClubService
     public function __construct(
         private GetClubService $getClubService,
         private GetClubPlayerByIdService $getClubPlayerByIdService,
-        private PlayerRepository $playerRepository
+        private PlayerRepository $playerRepository,
+        private SendEmail $sendEmail
     )
     {
     }
@@ -29,6 +31,8 @@ class DeletePlayerClubService
 
         $club->removePlayer($player);
         $this->playerRepository->update($player);
+
+        ($this->sendEmail)($player, 'delete', $club);
     }
 
 }

@@ -7,13 +7,15 @@ namespace App\Packages\Club\Application\Services;
 use App\Packages\Club\Application\Exception\CoachNotFoundInClubException;
 use App\Packages\Coach\Domain\Repository\CoachRepository;
 use App\Packages\Common\Application\Exception\ResourceNotFoundException;
+use App\Packages\Common\Application\Services\SendEmail;
 
 class DeleteCoachClubService
 {
     public function __construct(
         private GetClubService $getClubService,
         private GetClubCoachByIdService $getClubCoachByIdService,
-        private CoachRepository $coachRepository
+        private CoachRepository $coachRepository,
+        private SendEmail $sendEmail
     )
     {
     }
@@ -29,6 +31,8 @@ class DeleteCoachClubService
 
         $club->removeCoach($coach);
         $this->coachRepository->update($coach);
+
+        ($this->sendEmail)($coach, 'delete', $club);
     }
 
 }
