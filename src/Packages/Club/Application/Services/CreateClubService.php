@@ -58,8 +58,7 @@ class CreateClubService
                 new ClubName($clubDto->name),
                 new ClubCity($clubDto->city),
                 new ClubCountry($clubDto->country),
-                new ClubBudget($clubDto->budget),
-                new DateTimeImmutable()
+                new ClubBudget($clubDto->budget)
             );
 
             $this->clubRepository->add($club);

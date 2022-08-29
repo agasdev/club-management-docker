@@ -2,6 +2,7 @@
 
 UID = $(shell id -u)
 DOCKER_BE = club-management
+XDEBUG_MODE = coverage
 
 help: ## Show this help message
 	@echo 'usage: make [target]'
@@ -45,3 +46,9 @@ ssh-be: ## bash into the be container
 
 code-style: ## Runs php-cs to fix code styling following Symfony rules
 	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} php-cs-fixer fix src --rules=@Symfony
+
+test: ## Run tests
+	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} ./bin/phpunit
+
+test-coverage: ## Run tests with coverage
+	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} php -dxdebug.mode=coverage ./bin/phpunit --coverage-html coverage

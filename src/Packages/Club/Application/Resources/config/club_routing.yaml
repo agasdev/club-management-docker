@@ -7,38 +7,58 @@ club_create_player:
   path: /club/{id}/player
   controller: App\Packages\Club\Infrastructure\EntryPoint\Api\CreatePlayerToClubAction
   methods: POST
+  requirements:
+    id: '[0-9a-f]{8}-[0-9a-f]{4}-1[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}'
 
 club_add_player:
   path: /club/{id}/player/{playerId}
   controller: App\Packages\Club\Infrastructure\EntryPoint\Api\AddPlayerToClubAction
   methods: PATCH
+  requirements:
+    id: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
+    playerId: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
 
 club_create_coach:
   path: /club/{id}/coach
   controller: App\Packages\Club\Infrastructure\EntryPoint\Api\CreateCoachToClubAction
   methods: POST
+  requirements:
+    id: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
 
 club_add_coach:
   path: /club/{id}/coach/{coachId}
   controller: App\Packages\Club\Infrastructure\EntryPoint\Api\AddCoachToClubAction
   methods: PATCH
+  requirements:
+    id: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
+    coachId: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
 
 club_update:
   path: /club/{id}
   controller: App\Packages\Club\Infrastructure\EntryPoint\Api\UpdateClubAction
   methods: PUT|PATCH
+  requirements:
+    id: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
 
 club_delete_player:
   path: /club/{id}/player/{playerId}
   controller: App\Packages\Club\Infrastructure\EntryPoint\Api\DeletePlayerFromClubAction
   methods: DELETE
+  requirements:
+    id: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
+    playerId: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
 
 club_delete_coach:
   path: /club/{id}/coach/{coachId}
   controller: App\Packages\Club\Infrastructure\EntryPoint\Api\DeleteCoachFromClubAction
   methods: DELETE
+  requirements:
+    id: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
+    coachId: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
 
 club_list_players:
   path: /club/{id}/players
   controller: App\Packages\Club\Infrastructure\EntryPoint\Api\ListClubPlayersAction
   methods: GET
+  requirements:
+    id: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"

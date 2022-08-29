@@ -48,7 +48,7 @@ class AddCoachToClubService
      * @throws InvalidCoachFormException
      * @throws InvalidResourceException
      */
-    public function __invoke(string $id, string $coachId, Request $request)
+    public function __invoke(string $id, string $coachId, Request $request): CoachDto
     {
         $club = ($this->getClubService)($id);
         $coach = ($this->getCoachService)($coachId);
