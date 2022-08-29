@@ -8,7 +8,7 @@ club_create_player:
   controller: App\Packages\Club\Infrastructure\EntryPoint\Api\CreatePlayerToClubAction
   methods: POST
   requirements:
-    id: '[0-9a-f]{8}-[0-9a-f]{4}-1[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}'
+    id: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
 
 club_add_player:
   path: /club/{id}/player/{playerId}

@@ -1,0 +1,332 @@
+{
+	"info": {
+		"_postman_id": "8fd953ae-7593-4e08-9aee-7632322dde0a",
+		"name": "club-manager-docker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7205389"
+	},
+	"item": [
+		{
+			"name": "Dar de alta un jugador sin pertenecer a un club",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Cristiano\",\n    \"surname\": \"Ronaldo\",\n    \"dateOfBirth\": \"1984-07-15\",\n    \"city\": \"Ciudad\",\n    \"country\": \"Portugal\",\n    \"email\": \"cr7@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/player",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"player"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar de alta un entrenador sin pertenecer a un club",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Rafael\",\n    \"surname\": \"Benitez\",\n    \"dateOfBirth\": \"1959-10-08\",\n    \"city\": \"Valencia\",\n    \"country\": \"España\",\n    \"email\": \"rafa@email.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/coach",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"coach"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": " Dar de alta un club",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Real Madrid CF\",\n    \"city\": \"Madrid\",\n    \"country\": \"España\",\n    \"budget\": \"4000000000\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/club",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"club"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar de alta un jugador en el club",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Antonio\",\n    \"surname\": \"Kroos\",\n    \"dateOfBirth\": \"1989-09-15\",\n    \"city\": \"Some\",\n    \"country\": \"Alemania\",\n    \"salary\": \"68000\",\n    \"email\": \"kroos@email.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/club/60ae1dd4-c615-4347-b1bc-94e2e1cbe38a/player",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"club",
+						"60ae1dd4-c615-4347-b1bc-94e2e1cbe38a",
+						"player"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar de alta un entrenador en el club",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Carlo\",\n    \"surname\": \"Ancelotti\",\n    \"dateOfBirth\": \"1950-08-15\",\n    \"city\": \"Some\",\n    \"country\": \"Italia\",\n    \"salary\": \"43000\",\n    \"email\": \"carletto@email.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/club/60ae1dd4-c615-4347-b1bc-94e2e1cbe38a/coach",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"club",
+						"60ae1dd4-c615-4347-b1bc-94e2e1cbe38a",
+						"coach"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar el presupuesto de un club",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"budget\": \"6500000\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/club/aa47a336-9866-46b3-a731-7ba74584211e",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"club",
+						"aa47a336-9866-46b3-a731-7ba74584211e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar de baja un jugador del club",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/club/60ae1dd4-c615-4347-b1bc-94e2e1cbe38a/player/d7632ec1-1ad5-4616-b1ca-dbcf77cbfc09",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"club",
+						"60ae1dd4-c615-4347-b1bc-94e2e1cbe38a",
+						"player",
+						"d7632ec1-1ad5-4616-b1ca-dbcf77cbfc09"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar de baja un entrenador del club",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/club/60ae1dd4-c615-4347-b1bc-94e2e1cbe38a/coach/8a863db6-3bdf-4542-8786-ea5fa0d95d74",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"club",
+						"60ae1dd4-c615-4347-b1bc-94e2e1cbe38a",
+						"coach",
+						"8a863db6-3bdf-4542-8786-ea5fa0d95d74"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar jugadores de un club",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/club/60ae1dd4-c615-4347-b1bc-94e2e1cbe38a/players?itemsPerPage=25&page=1&search=dani",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"club",
+						"60ae1dd4-c615-4347-b1bc-94e2e1cbe38a",
+						"players"
+					],
+					"query": [
+						{
+							"key": "itemsPerPage",
+							"value": "25"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "search",
+							"value": "dani"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar de alta un jugador existente en el club",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"salary\": \"35000\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/club/60ae1dd4-c615-4347-b1bc-94e2e1cbe38a/player/d7632ec1-1ad5-4616-b1ca-dbcf77cbfc09",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"club",
+						"60ae1dd4-c615-4347-b1bc-94e2e1cbe38a",
+						"player",
+						"d7632ec1-1ad5-4616-b1ca-dbcf77cbfc09"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar de alta un entrenador existente al club",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"salary\": \"44000\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/api/club/60ae1dd4-c615-4347-b1bc-94e2e1cbe38a/coach/8a863db6-3bdf-4542-8786-ea5fa0d95d74",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"club",
+						"60ae1dd4-c615-4347-b1bc-94e2e1cbe38a",
+						"coach",
+						"8a863db6-3bdf-4542-8786-ea5fa0d95d74"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
